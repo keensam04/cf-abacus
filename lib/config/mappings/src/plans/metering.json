@@ -14,6 +14,10 @@
   "test-resource": {
     "basic": "test-metering-plan",
     "standard": "test-metering-plan"
+  },
+  "data-consumption": {
+    "basic": "standard-data-consumption",
+    "standard": "standard-data-consumption"
   }
 }
 
