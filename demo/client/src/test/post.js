@@ -40,12 +40,6 @@ const usage = {
   }, {
     measure: 'heavy_api_calls',
     quantity: 100
-  }, {
-    measure: 'data',
-    quantity: 1000
-  }, {
-    measure: 'api_calls',
-    quantity: 100
   }]
 };
 
