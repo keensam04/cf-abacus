@@ -25,18 +25,21 @@ const time = commander.time || Date.now();
 const usage = {
   start: time,
   end: time + 1,
-  organization_id: 'b3d7fe4d-3cb1-4cc3-a831-ffe98e20cf28',
+  organization_id: 'a3d7fe4d-3cb1-4cc3-a831-ffe98e20cf27',
   space_id: 'aaeae239-f3f8-483c-9dd0-de5d41c38b6a',
   consumer_id: 'external:bbeae239-f3f8-483c-9dd0-de6781c38bab',
-  resource_id: 'test-resource',
+  resource_id: 'object-storage',
   plan_id: 'basic',
   resource_instance_id: '0b39fa70-a65f-4183-bae8-385633ca5c87',
   measured_usage: [{
-    measure: 'data',
-    quantity: 10000
+    measure: 'storage',
+    quantity: 1073741824
   }, {
-    measure: 'api_calls',
+    measure: 'light_api_calls',
     quantity: 1000
+  }, {
+    measure: 'heavy_api_calls',
+    quantity: 100
   }]
 };
 
@@ -48,7 +51,6 @@ request.post(collector + '/v1/metering/collected/usage', {
     console.log('Error', err);
   if(val) {
     console.log('Status %d', val.statusCode);
-    console.log(JSON.stringify(usage));
     if(val.headers.location)
       console.log('Location %s', val.headers.location);
     if(val.body)

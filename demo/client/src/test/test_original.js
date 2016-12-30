@@ -62,7 +62,7 @@ const secured = () => process.env.SECURED === 'true' ? true : false;
 // Token fetcher
 const token = secured() ? oauth.cache(authServer,
   process.env.CLIENT_ID, process.env.CLIENT_SECRET,
-  'abacus.usage.test-resource.write abacus.usage.test-resource.read') :
+  'abacus.usage.object-storage.write abacus.usage.object-storage.read') :
   undefined;
 
 // Builds the expected window value based upon the
@@ -126,64 +126,73 @@ describe('abacus-demo-client', function() {
     const usage = [
       {
         message:
-          'Submitting 10000 records of data, 1000 API calls',
+          'Submitting 10 GB, 1000 light API calls, 100 heavy API calls',
         usage: {
           start: start,
           end: end,
           organization_id: 'us-south:a3d7fe4d-3cb1-4cc3-a831-ffe98e20cf27',
           space_id: 'aaeae239-f3f8-483c-9dd0-de5d41c38b6a',
           consumer_id: 'app:bbeae239-f3f8-483c-9dd0-de6781c38bab',
-          resource_id: 'test-resource',
+          resource_id: 'object-storage',
           plan_id: 'basic',
           resource_instance_id: '0b39fa70-a65f-4183-bae8-385633ca5c87',
           measured_usage: [{
-            measure: 'data',
-            quantity: 10000
+            measure: 'storage',
+            quantity: 1073741824
           }, {
-            measure: 'api_calls',
+            measure: 'light_api_calls',
             quantity: 1000
+          }, {
+            measure: 'heavy_api_calls',
+            quantity: 100
           }]
         }
       },
       {
         message:
-          'Submitting 10000 records of data, 1000 API calls',
+          'Submitting 10 GB, 1000 light API calls, 100 heavy API calls',
         usage: {
           start: start + 1,
           end: end + 1,
           organization_id: 'us-south:a3d7fe4d-3cb1-4cc3-a831-ffe98e20cf27',
           space_id: 'aaeae239-f3f8-483c-9dd0-de5d41c38b6a',
           consumer_id: 'app:bbeae239-f3f8-483c-9dd0-de6781c38bab',
-          resource_id: 'test-resource',
+          resource_id: 'object-storage',
           plan_id: 'basic',
           resource_instance_id: '0b39fa70-a65f-4183-bae8-385633ca5c87',
           measured_usage: [{
-            measure: 'data',
-            quantity: 10000
+            measure: 'storage',
+            quantity: 1073741824
           }, {
-            measure: 'api_calls',
+            measure: 'light_api_calls',
             quantity: 1000
+          }, {
+            measure: 'heavy_api_calls',
+            quantity: 100
           }]
         }
       },
       {
         message:
-          'Submitting 10000 records of data, 1000 API calls',
+          'Submitting 10 GB, 1000 light API calls, 100 heavy API calls',
         usage: {
           start: start + 2,
           end: end + 2,
           organization_id: 'us-south:a3d7fe4d-3cb1-4cc3-a831-ffe98e20cf27',
           space_id: 'aaeae239-f3f8-483c-9dd0-de5d41c38b6a',
           consumer_id: 'app:bbeae239-f3f8-483c-9dd0-de6781c38bab',
-          resource_id: 'test-resource',
+          resource_id: 'object-storage',
           plan_id: 'basic',
           resource_instance_id: '0b39fa70-a65f-4183-bae8-385633ca5c87',
           measured_usage: [{
-            measure: 'data',
-            quantity: 10000
+            measure: 'storage',
+            quantity: 1073741824
           }, {
-            measure: 'api_calls',
+            measure: 'light_api_calls',
             quantity: 1000
+          }, {
+            measure: 'heavy_api_calls',
+            quantity: 100
           }]
         }
       }];
@@ -194,7 +203,7 @@ describe('abacus-demo-client', function() {
       account_id: '1234',
       windows: buildWindow(46.09),
       resources: [{
-        resource_id: 'test-resource',
+        resource_id: 'object-storage',
         windows: buildWindow(46.09),
         aggregated_usage: [{
           metric: 'storage',
@@ -207,9 +216,9 @@ describe('abacus-demo-client', function() {
           windows: buildWindow(45)
         }],
         plans: [{
-          plan_id: 'basic/basic-data-consumption/' +
+          plan_id: 'basic/basic-object-storage/' +
             'object-rating-plan/object-pricing-basic',
-          metering_plan_id: 'basic-data-consumption',
+          metering_plan_id: 'basic-object-storage',
           rating_plan_id: 'object-rating-plan',
           pricing_plan_id: 'object-pricing-basic',
           windows: buildWindow(46.09),
@@ -229,7 +238,7 @@ describe('abacus-demo-client', function() {
         space_id: 'aaeae239-f3f8-483c-9dd0-de5d41c38b6a',
         windows: buildWindow(46.09),
         resources: [{
-          resource_id: 'test-resource',
+          resource_id: 'object-storage',
           windows: buildWindow(46.09),
           aggregated_usage: [{
             metric: 'storage',
@@ -242,9 +251,9 @@ describe('abacus-demo-client', function() {
             windows: buildWindow(45)
           }],
           plans: [{
-            plan_id: 'basic/basic-data-consumption/' +
+            plan_id: 'basic/basic-object-storage/' +
               'object-rating-plan/object-pricing-basic',
-            metering_plan_id: 'basic-data-consumption',
+            metering_plan_id: 'basic-object-storage',
             rating_plan_id: 'object-rating-plan',
             pricing_plan_id: 'object-pricing-basic',
             windows: buildWindow(46.09),
@@ -264,7 +273,7 @@ describe('abacus-demo-client', function() {
           consumer_id: 'app:bbeae239-f3f8-483c-9dd0-de6781c38bab',
           windows: buildWindow(46.09),
           resources: [{
-            resource_id: 'test-resource',
+            resource_id: 'object-storage',
             windows: buildWindow(46.09),
             aggregated_usage: [{
               metric: 'storage',
@@ -277,9 +286,9 @@ describe('abacus-demo-client', function() {
               windows: buildWindow(45)
             }],
             plans: [{
-              plan_id: 'basic/basic-data-consumption/' +
+              plan_id: 'basic/basic-object-storage/' +
                 'object-rating-plan/object-pricing-basic',
-              metering_plan_id: 'basic-data-consumption',
+              metering_plan_id: 'basic-object-storage',
               rating_plan_id: 'object-rating-plan',
               pricing_plan_id: 'object-pricing-basic',
               windows: buildWindow(46.09),
@@ -320,11 +329,6 @@ describe('abacus-demo-client', function() {
           expect(val.statusCode).to.equal(201);
           expect(val.headers.location).to.not.equal(undefined);
           cb();
-
-          console.log("==================USAGE INFO==================");
-	  console.log(collector + '/v1/metering/collected/usage');
-	  console.log(val.headers.location);
-          console.log("==============================================");
         });
     };
 
@@ -352,16 +356,6 @@ describe('abacus-demo-client', function() {
       ].join('/'), extend({}, authHeader(token)), (err, val) => {
         expect(err).to.equal(undefined);
         expect(val.statusCode).to.equal(200);
-
-	console.log("==================METERING INFO==================");
-	console.log([
-          reporting,
-          'v1/metering/organizations',
-          'us-south:a3d7fe4d-3cb1-4cc3-a831-ffe98e20cf27',
-          'aggregated/usage'
-          ].join('/'));
-	console.log(val.body);
-	console.log("=================================================");
 
         // Compare the usage report we got with the expected report
         console.log('Processed %d usage docs', processed(val));

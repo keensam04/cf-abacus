@@ -12,7 +12,7 @@
     "standard": "standard-object-storage"
   },
   "test-resource": {
-    "basic": "basic-data-consumption",
+    "basic": "test-metering-plan",
     "standard": "test-metering-plan"
   }
 }
